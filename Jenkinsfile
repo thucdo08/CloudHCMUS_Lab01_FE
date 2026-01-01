@@ -3,7 +3,7 @@ pipeline {
     environment {
         // --- QUAN TRỌNG: Sửa dòng dưới thành tên DockerHub của bạn ---
         // Ví dụ: thucdo08/lab01-fe
-        DOCKER_IMAGE = 'dhuuthuc' 
+        DOCKER_IMAGE = 'dhuuthuc/Lab2-3-Frontend' 
         
         // Cái này giữ nguyên vì nãy bạn đặt ID là dockerhub-login rồi
         DOCKER_CRED_ID = 'dockerhub-login'
@@ -47,4 +47,5 @@ pipeline {
         }
     }
 }
+
 
