@@ -59,7 +59,7 @@ resource "aws_instance" "app_server" {
   
   # --- QUAN TRỌNG: SỬA TÊN KEY CỦA BẠN VÀO DƯỚI ĐÂY ---
   # Key pair name bạn đang dùng trên AWS (ví dụ: my-key-pair)
-  key_name      = "ecommerce-key" 
+  key_name      = "Jenkins-IaC-Key" 
   
   vpc_security_group_ids = [aws_security_group.app_sg.id]
 
