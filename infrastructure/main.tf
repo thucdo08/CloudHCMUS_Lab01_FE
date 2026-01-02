@@ -11,6 +11,13 @@ provider "aws" {
   region = "ap-southeast-1" # Singapore
 }
 
+# --- TẠO VPC MẶC ĐỊNH ---
+resource "aws_default_vpc" "default" {
+  tags = {
+    Name = "Default VPC"
+  }
+}
+
 # 1. Tạo Security Group (Mở cổng 22 và 80)
 resource "aws_security_group" "app_sg" {
   name        = "app-sg-tf"
