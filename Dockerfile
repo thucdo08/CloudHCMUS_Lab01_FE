@@ -11,4 +11,5 @@ COPY . .
 
 EXPOSE 8080
 
-CMD ["http-server", "-p", "2048"]
+
+CMD ["http-server", "-p", "8080"]
