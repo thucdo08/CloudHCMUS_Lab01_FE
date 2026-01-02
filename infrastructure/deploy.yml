@@ -1,0 +1,65 @@
+---
+- name: Deploy App to EC2
+  hosts: all
+  become: yes
+  remote_user: ubuntu
+  vars:
+    # Sửa tên DockerHub của bạn ở đây
+    docker_image: "dhuuthuc/lab01-fe:latest"
+    container_name: "my-auto-app"
+
+  tasks:
+    - name: Install required system packages
+      apt:
+        pkg:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+          - python3-pip
+          - virtualenv
+          - python3-setuptools
+        state: latest
+        update_cache: true
+
+    - name: Add Docker GPG apt Key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Add Docker Repository
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu focal stable
+        state: present
+
+    - name: Install Docker
+      apt:
+        name: docker-ce
+        state: latest
+
+    - name: Start Docker service
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Pull Docker Image
+      docker_image:
+        name: "{{ docker_image }}"
+        source: pull
+
+    - name: Stop running container (if any)
+      docker_container:
+        name: "{{ container_name }}"
+        state: absent
+        force_kill: yes
+
+    - name: Run Docker Container
+      docker_container:
+        name: "{{ container_name }}"
+        image: "{{ docker_image }}"
+        state: started
+        restart_policy: always
+        ports:
+          # Map port 80 của máy chủ vào port 2048 của app
+          - "80:2048"
