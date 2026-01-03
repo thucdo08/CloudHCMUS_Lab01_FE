@@ -6,7 +6,7 @@ pipeline {
         DOCKER_IMAGE = 'dhuuthuc/lab01-fe' 
         
         // Cái này giữ nguyên vì nãy bạn đặt ID là dockerhub-login rồi
-        DOCKER_CRED_ID = 'dockerhub-login'
+        REGISTRY_CREDS = 'dockerhub-id'    // ID bạn đặt lúc nãy
     }
     stages {
         stage('Checkout Code') {
@@ -47,6 +47,7 @@ pipeline {
         }
     }
 }
+
 
 
 
